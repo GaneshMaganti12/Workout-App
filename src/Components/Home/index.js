@@ -2,6 +2,8 @@ import Header from "../Header"
 import { useEffect, useState } from "react"
 import "./index.css"
 import Card from "../Card"
+import { homeGet } from "../Reducer/WorkoutReducer"
+import { useSelector, useDispatch } from "react-redux"
 
 export default function Home(){
 
@@ -13,21 +15,16 @@ export default function Home(){
 // // return(data.map(each=>(<img src={each.imageurl}/>)))
 
 // }
-const[element,setelement]=useState([])
+    const element = useSelector(state => state.workout.home)
+    console.log(element)
 
-const[initial,setIntial]=useState("")
+    const[initial,setIntial]=useState("")
 
-useEffect(() => {
-    fetch('http://localhost:8888/workouts',{
-        method:"GET"
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        setelement(data)
-        ;
-    })
-  }, [])
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(homeGet())
+    }, [dispatch])
 
 
   const settingvalue=(event)=>{
@@ -40,13 +37,13 @@ useEffect(() => {
         <div className="main-home-container-2">
             <div>
             <div className="input-group input-cust">
-                <span class="input-group-text">Search</span>
+                <span className="input-group-text">Search</span>
                 {/* <textarea class="form-control" aria-label="With textarea" onChange={settingvalue}></textarea> */}
                 <input type="text" onChange={settingvalue} className="input-cont"/>
              </div>
              </div>
              <ul className="list-item-container">
-             {element.length==0?"":element.filter((eachele)=>(eachele.heading.toLowerCase().includes(initial))).map(each=>(<Card each={each}/>))}
+                {element.length === 0?"":element.filter((eachele)=>(eachele.heading.toLowerCase().includes(initial))).map(each=>(<Card key={each.id} each={each}/>))}
              </ul>
         </div>
         </div>

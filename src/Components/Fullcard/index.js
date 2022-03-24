@@ -1,38 +1,38 @@
 import Header from "../Header"
-import { useEffect,useState } from "react"
+import { useEffect} from "react"
 import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import "./index.css"
+import { workoutGet } from "../Reducer/WorkoutReducer"
 
 export default function Fullcard(){
 
-    const[final,setfinal]=useState({})
+    const final = useSelector(state => state.workout.fitness)
+    // console.log(final);
+
+    const dispatch = useDispatch()
 
     const req=useParams()
-
-    console.log("got it",req)
     useEffect(()=>{
-        fetch(`http://localhost:8888/workouts/${req.id}`,{method:"GET"}).then(res=>(res.json()))
-        .then((data)=>setfinal(data))
-    },[])
+        console.log("initailize")
+        dispatch(workoutGet(req.id))
+    },[req.id])
 
 
     return(
         <div className="main-home-container">
             <Header/>
-            {/* <div className="for-look">            */}
-                 <div className="final-card-container for-look">
-                {final=={}?"":
+            <div className="final-card-container for-look">
+                {final ==={}?"": (
                     <div className="fullcard-image-container">
-                    <img src={final.imageurl} className="fullcard-image"/>
-                    <h1 className="card-head-calorie">calorie/hour:{final.Calorieburnperhour} calorie</h1>
-                    <h1>{final.heading}</h1>
-                     <p className="full-card-para-cont">{final.fulldiscription}</p>
+                        <img src={final.imageurl} className="fullcard-image" alt='name'/>
+                        <h1 className="card-head-calorie">calorie/hour:{final.Calorieburnperhour} calorie</h1>
+                        <h1>{final.heading}</h1>
+                        <p className="full-card-para-cont">{final.fulldiscription}</p>
                     </div>
-                
-               
-                    }
-                    {/* </div>        */}
-        </div>
+                )}
+
+            </div>
         </div>
 
     )

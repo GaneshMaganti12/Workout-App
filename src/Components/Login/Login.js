@@ -73,11 +73,11 @@ import Cookies from "js-cookie"
 import "./Login.css"
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux'
-import { fetchGet } from '../LoginReducer/LoginReducer'
+import { fetchGet } from '../Reducer/LoginReducer'
 
 export default function Login() {
 
-    const data = useSelector(state => state.login)
+    const data = useSelector(state => state.login.login)
     // console.log(data)
     const dispatch = useDispatch()
 

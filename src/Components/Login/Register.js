@@ -53,12 +53,12 @@
 // }
 
 
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import {useFormik} from "formik"
 import * as Yup from "yup"
 import "./Register.css"
 import { useDispatch } from 'react-redux'
-import { fetchPost } from '../LoginReducer/LoginReducer'
+import { fetchPost } from '../Reducer/LoginReducer'
 
 export default function Register() {
 

@@ -13,14 +13,14 @@ function App() {
     <BrowserRouter>
     <Routes>
     <Route element = {<PrivateRoute1/>}>
-    <Route path="/login" element={<LoginRegister/>}/>
-    <Route path="/register" element={<LoginRegister/>}/>
+      <Route path="/login" element={<LoginRegister/>}/>
+      <Route path="/register" element={<LoginRegister/>}/>
     </Route>
       
       <Route element = {<PrivateRoute/>}>
-      <Route path="/workouts/" element={<Home/>}/>
-      <Route path="/workouts/:id" element={<Fullcard/>}/>
-      <Route path="*" element={<Notfound/>}/>
+        <Route path="/workouts/" element={<Home/>}/>
+        <Route path="/workouts/:id" element={<Fullcard/>}/>
+        <Route path="*" element={<Notfound/>}/>
       </Route>
     </Routes>
     </BrowserRouter>
